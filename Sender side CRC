@@ -30,7 +30,7 @@ void main()
 
 		for(j = 0;j < m - 1;j++)
 		{
-			rem[j] = fun(rem[j + 1],(div[j  + 1] * mul));
+			rem[j] = fun(rem[j + 1],(div[j  + 1] * mul)); /* since bit in the first position decides nature of  word i.e eg when u try to exor 000 and 111 u multiply 111 with 0 to exor with 000 , we only take j+1 and j+2 values while perfoming exor at every iteration */
 		}
 		if(i == n + m -1)
 			rem[j] = fun(did[n-1],(div[j  + 1] * mul));
