@@ -1,0 +1,58 @@
+
+#include<stdio.h>
+#include<string.h>
+int fun(int,int);
+void main()
+{
+	int rem[10],did[10],div[10];
+	int n,m,mul,i,j;
+	printf("enter length of received codeword:"); 
+	scanf("%d",&n);
+	printf("enter the received codeword:");
+	for(i = 0;i < n;i++)
+	{
+		scanf("%d",&did[i]);
+	}
+	printf("enter lengthof generator:");
+	scanf("%d",&m);
+	printf("enter a generator key:");
+	for(j = 0;j < m;j++)
+	{
+		scanf("%d",&div[j]);
+		rem[j]= did[j];     /*since codword length is always greater than generator we are trying to exor first j words of codeword to generator and then increment  for nxt part of codeword for next exor  */
+	}
+	mul = did[0];
+	for(i = m;i < n + 1;i++)
+	{
+		
+		for(j = 0;j < m - 1;j++)		
+		{
+			rem[j] = fun(rem[j + 1],(div[j  + 1] * mul));/* since bit in the first position decides nature of  word i.e eg when u try to exor 000 and 111 u multiply 111 with 0 to exor with 000 , we only take j+1 and j+2 values while perfoming exor at every iteration */
+		}
+		if(i == n + m -1)
+			rem[j] = fun(did[n-1],(div[j  + 1] * mul));
+		else
+			rem[j] = did[i];
+		mul = rem[0];
+	}	
+	
+printf("the remainder at the receiver side is : \n");	/* if remainder at receiver contains all 0 then there is no error 
+                                                        in the codeword which u have sent.
+                                                        If 1 is present at a particular bit position then there is error 
+                                                        at that particular bit. */
+for(j = 0;j < (m-1);j++)
+	{
+		printf("%d",rem[j]);
+	}
+	printf("\n");
+}
+int fun(int i,int j)   /* Perfoming EX-OR Operation*/
+{
+	if(i == j)
+		return 0;          
+	else
+		return 1;
+}
+
+
+	
