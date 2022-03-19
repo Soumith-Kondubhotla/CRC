@@ -20,7 +20,7 @@ void main()
 		scanf("%d",&div[j]);
 		rem[j]= did[j];
 	}
-	for(i = n;i < m + n - 1;i++)
+	for(i = n;i < m + n - 1;i++) /* since we have to add (Generator length-1) zeros to codeword  */
 	{
 		did[i] = 0;
 	}
@@ -51,7 +51,7 @@ void main()
 	}
 	printf("\n");
 }
-int fun(int i,int j)
+int fun(int i,int j)  /* Perfoming EX-OR Operation */
 {
 	if(i == j)
 		return 0;
